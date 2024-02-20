@@ -1,0 +1,15 @@
+#!/usr/bin/with-contenv sh
+
+KEYS_PATH="$SNIPS_SSH_AUTHORIZEDKEYSPATH"
+
+# create authorized_keys file
+if [[ ! -f "$KEYS_PATH" ]]; then
+  TMP_FILE="$(mktemp)"
+  install -m600 -o $PUID -g $PGID "$TMP_FILE" "$KEYS_PATH"
+fi
+
+# change chdir
+cd /config
+
+# run with limited permissions
+exec s6-setuidgid $PUID:$PGID /app/snips.sh
