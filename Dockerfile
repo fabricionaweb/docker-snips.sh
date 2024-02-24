@@ -34,8 +34,7 @@ COPY --from=source /src ./
 ARG VERSION
 ARG COMMIT=$VERSION
 RUN mkdir /build && \
-    go build -ldflags "-s -w" \
-        -tags noguesser \
+    go build -tags noguesser -trimpath -ldflags "-s -w" \
         -o /build/
 
 # runtime stage ================================================================
