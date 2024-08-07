@@ -12,9 +12,9 @@ ARG VERSION
 ADD https://github.com/robherley/snips.sh.git#${BRANCH:-v$VERSION} ./
 
 # apply available patches
-RUN apk add --no-cache patch
-COPY patches ./
-RUN find ./ -name "*.patch" -print0 | sort -z | xargs -t -0 -n1 patch -p1 -i
+# RUN apk add --no-cache patch
+# COPY patches ./
+# RUN find ./ -name "*.patch" -print0 | sort -z | xargs -t -0 -n1 patch -p1 -i
 
 # build stage ==================================================================
 FROM base AS build-app
